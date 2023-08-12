@@ -781,10 +781,12 @@ namespace Microsoft.PowerApps.TestAutomation.Browser
             }
             catch (NoSuchElementException)
             {
+                driver.TakeScreenshot($"Nosuch_{DateTime.Now:yyyyMMdd_HHmmss}.png");
                 success = false;
             }
             catch (WebDriverTimeoutException)
             {
+                driver.TakeScreenshot($"TimeoutError_{DateTime.Now:yyyyMMdd_HHmmss}.png");
                 success = false;
             }
 
@@ -819,5 +821,19 @@ namespace Microsoft.PowerApps.TestAutomation.Browser
         }
 
         #endregion Args / Tracing
+
+
+        public static void TakeScreenshot(this IWebDriver driver, string screenshotName)
+        {
+            string directory = Environment.GetEnvironmentVariable("Agent.TempDirectory");
+            if (string.IsNullOrEmpty(directory))
+            {
+                directory = Directory.GetCurrentDirectory();  // fallback to current directory if running locally
+            }
+            string fullPath = Path.Combine(directory, screenshotName);
+            Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
+            ss.SaveAsFile(fullPath, ScreenshotImageFormat.Png);
+        }
+
     }
 }
