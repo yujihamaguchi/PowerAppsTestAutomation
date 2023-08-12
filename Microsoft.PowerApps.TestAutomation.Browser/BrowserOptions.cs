@@ -78,7 +78,7 @@ namespace Microsoft.PowerApps.TestAutomation.Browser
         {
             var options = new FirefoxOptions()
             {
-                UseLegacyImplementation = false
+                //UseLegacyImplementation = false
             };
 
             return options;

@@ -666,33 +666,45 @@ namespace Microsoft.PowerApps.TestAutomation.Browser
         public static IWebElement WaitUntilAvailable(this IWebDriver driver, By by, TimeSpan timeout, Action<IWebDriver> successCallback, Action<IWebDriver> failureCallback)
         {
             WebDriverWait wait = new WebDriverWait(driver, timeout);
-            bool? success;
             IWebElement returnElement = null;
 
             wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
 
-            try
-            {
-                returnElement = wait.Until(d => d.FindElement(by));
+            Thread.Sleep(5000);
 
-                success = true;
-            }
-            catch (NoSuchElementException)
+            int retryCount = 3;
+            int delayBetweenRetries = 5000; // 5 seconds
+
+            bool success = false;
+
+            for (int attempt = 0; attempt < retryCount; attempt++)
             {
-                success = false;
-            }
-            catch (WebDriverTimeoutException)
-            {
-                success = false;
+                try
+                {
+                    returnElement = wait.Until(d => d.FindElement(by));
+                    success = true;
+                    break; // If element is found, exit the loop.
+                }
+                catch (NoSuchElementException)
+                {
+                    success = false;
+
+                    if (attempt == retryCount - 1) // If it's the last attempt and still failing, throw the exception.
+                        throw;
+                    else
+                        Thread.Sleep(delayBetweenRetries); // Wait for the specified time before trying again.
+                }
             }
 
-            if (success.HasValue && success.Value && successCallback != null)
+            if (success && successCallback != null)
                 successCallback(driver);
-            else if (success.HasValue && !success.Value && failureCallback != null)
+            else if (!success && failureCallback != null)
                 failureCallback(driver);
 
             return returnElement;
         }
+
+
 
         public static bool WaitUntilVisible(this IWebDriver driver, By by)
         {

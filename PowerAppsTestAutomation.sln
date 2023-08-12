@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2046
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.PowerApps.TestAutomation.Browser", "Microsoft.PowerApps.TestAutomation.Browser\Microsoft.PowerApps.TestAutomation.Browser.csproj", "{C9748803-F3CB-4531-B313-BC24D4D0BF0C}"
 EndProject
