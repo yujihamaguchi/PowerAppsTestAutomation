@@ -670,10 +670,10 @@ namespace Microsoft.PowerApps.TestAutomation.Browser
 
             wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
 
-            Thread.Sleep(5000);
+            Thread.Sleep(6000);
 
             int retryCount = 3;
-            int delayBetweenRetries = 5000; // 5 seconds
+            int delayBetweenRetries = 2000; // 5 seconds
 
             bool success = false;
 
