@@ -666,11 +666,12 @@ namespace Microsoft.PowerApps.TestAutomation.Browser
         public static IWebElement WaitUntilAvailable(this IWebDriver driver, By by, TimeSpan timeout, Action<IWebDriver> successCallback, Action<IWebDriver> failureCallback)
         {
             WebDriverWait wait = new WebDriverWait(driver, timeout);
+            
             IWebElement returnElement = null;
 
             wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
 
-            Thread.Sleep(6000);
+            Thread.Sleep(5000);
 
             int retryCount = 3;
             int delayBetweenRetries = 2000; // 5 seconds
