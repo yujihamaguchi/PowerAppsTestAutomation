@@ -106,9 +106,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="patestautomationbak.runsettings">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="patestautomation.runsettings">
       <SubType>Designer</SubType>
     </None>
