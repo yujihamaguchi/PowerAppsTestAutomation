@@ -38,10 +38,12 @@ namespace Microsoft.PowerApps.TestAutomation.Tests
         [ClassInitialize]
         public static void Initialize(TestContext TestContext)
         {
+       
 
-         
+
+
+            _testContext = TestContext;
             
-             _testContext = TestContext;
             
             _username = _testContext.Properties["OnlineUsername"].ToString();
             _password = _testContext.Properties["OnlinePassword"].ToString();
@@ -53,7 +55,7 @@ namespace Microsoft.PowerApps.TestAutomation.Tests
             _usePrivateMode = _testContext.Properties["UsePrivateMode"].ToString();
             _testAutomationURLFilePath = _testContext.Properties["TestAutomationURLFilePath"].ToString();
             _testMaxWaitTimeInSeconds = Convert.ToInt16(_testContext.Properties["TestMaxWaitTimeInSeconds"]);
-            
+                        
         }
 
         [TestCategory("PowerAppsTestAutomation")]
