@@ -9,6 +9,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using OpenQA.Selenium;
+using System.Threading;
 
 namespace Microsoft.PowerApps.TestAutomation.Tests
 {
@@ -37,8 +38,11 @@ namespace Microsoft.PowerApps.TestAutomation.Tests
         [ClassInitialize]
         public static void Initialize(TestContext TestContext)
         {
-            _testContext = TestContext;
 
+         
+            
+             _testContext = TestContext;
+            
             _username = _testContext.Properties["OnlineUsername"].ToString();
             _password = _testContext.Properties["OnlinePassword"].ToString();
             _xrmUri = new Uri(_testContext.Properties["OnlineUrl"].ToString());
@@ -49,6 +53,7 @@ namespace Microsoft.PowerApps.TestAutomation.Tests
             _usePrivateMode = _testContext.Properties["UsePrivateMode"].ToString();
             _testAutomationURLFilePath = _testContext.Properties["TestAutomationURLFilePath"].ToString();
             _testMaxWaitTimeInSeconds = Convert.ToInt16(_testContext.Properties["TestMaxWaitTimeInSeconds"]);
+            
         }
 
         [TestCategory("PowerAppsTestAutomation")]
@@ -247,7 +252,8 @@ namespace Microsoft.PowerApps.TestAutomation.Tests
                 {
                     try
                     {
-                        e.WaitUntilVisible(By.ClassName("apps-list"), new TimeSpan(0, 0, 30));
+                        // e.WaitUntilVisible(By.ClassName("apps-list"), new TimeSpan(0, 0, 30));
+                        e.WaitUntilVisible(By.XPath(Elements.Xpath[Reference.Login.AppsList]), new TimeSpan(0, 0, 30));
                     }
                     catch (Exception exc)
                     {

@@ -162,7 +162,8 @@ namespace Microsoft.PowerApps.TestAutomation.Api
                         {
                             try
                             {
-                                e.WaitUntilVisible(By.ClassName("apps-list"), new TimeSpan(0, 0, 30));
+                                // e.WaitUntilVisible(By.ClassName("apps-list"), new TimeSpan(0, 0, 30));
+                                e.WaitUntilVisible(By.XPath(Elements.Xpath[Reference.Login.AppsList]), new TimeSpan(0, 0, 30));
                             }
                             catch (Exception exc)
                             {
@@ -190,7 +191,8 @@ namespace Microsoft.PowerApps.TestAutomation.Api
                     {
                         try
                         {
-                            e.WaitUntilVisible(By.ClassName("apps-list"), new TimeSpan(0, 0, 30));
+                            // e.WaitUntilVisible(By.ClassName("apps-list"), new TimeSpan(0, 0, 30));
+                            e.WaitUntilVisible(By.XPath(Elements.Xpath[Reference.Login.AppsList]), new TimeSpan(0, 0, 30));
                         }
                         catch (Exception exc)
                         {
@@ -222,7 +224,8 @@ namespace Microsoft.PowerApps.TestAutomation.Api
                                     {
                                         try
                                         {
-                                            e.WaitUntilVisible(By.ClassName("apps-list"), new TimeSpan(0, 0, 30));
+                                            // e.WaitUntilVisible(By.ClassName("apps-list"), new TimeSpan(0, 0, 30));
+                                            e.WaitUntilVisible(By.XPath(Elements.Xpath[Reference.Login.AppsList]), new TimeSpan(0, 0, 30));
                                         }
                                         catch (Exception exc)
                                         {

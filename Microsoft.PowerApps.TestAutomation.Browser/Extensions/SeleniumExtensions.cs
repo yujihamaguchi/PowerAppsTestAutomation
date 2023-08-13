@@ -666,40 +666,29 @@ namespace Microsoft.PowerApps.TestAutomation.Browser
         public static IWebElement WaitUntilAvailable(this IWebDriver driver, By by, TimeSpan timeout, Action<IWebDriver> successCallback, Action<IWebDriver> failureCallback)
         {
             WebDriverWait wait = new WebDriverWait(driver, timeout);
-            
+            bool? success;
             IWebElement returnElement = null;
 
             wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
 
-            Thread.Sleep(5000);
-
-            int retryCount = 3;
-            int delayBetweenRetries = 2000; // 5 seconds
-
-            bool success = false;
-
-            for (int attempt = 0; attempt < retryCount; attempt++)
+            try
             {
-                try
-                {
-                    returnElement = wait.Until(d => d.FindElement(by));
-                    success = true;
-                    break; // If element is found, exit the loop.
-                }
-                catch (NoSuchElementException)
-                {
-                    success = false;
+                returnElement = wait.Until(d => d.FindElement(by));
 
-                    if (attempt == retryCount - 1) // If it's the last attempt and still failing, throw the exception.
-                        throw;
-                    else
-                        Thread.Sleep(delayBetweenRetries); // Wait for the specified time before trying again.
-                }
+                success = true;
+            }
+            catch (NoSuchElementException)
+            {
+                success = false;
+            }
+            catch (WebDriverTimeoutException)
+            {
+                success = false;
             }
 
-            if (success && successCallback != null)
+            if (success.HasValue && success.Value && successCallback != null)
                 successCallback(driver);
-            else if (!success && failureCallback != null)
+            else if (success.HasValue && !success.Value && failureCallback != null)
                 failureCallback(driver);
 
             return returnElement;
