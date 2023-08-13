@@ -50,7 +50,7 @@ jobs:
     - vstest
   variables:
   - name: PortalUrl
-    value: https://make.powerapps.com/environments/8febb20b-0bb2-eba8-ae06-c5790023ca49/home
+    value: https://make.powerapps.com/
     # Browser PrivateMode usage (true/false)
   - name: PrivateMode
     value: true
