@@ -65,24 +65,3 @@ steps:
 
       continueOnError: true
 
-
-
-    - task: VSTest@2
-
-      displayName: 'Run Power Apps Test Automation Tests via Firefox'
-      condition: or(eq('${{ parameters.BrowserType }}', 'Firefox'), eq('${{ parameters.BrowserType }}', 'All'))
-      inputs:
-
-        testAssemblyVer2: '${{parameters.RepositoryName}}\Microsoft.PowerApps.TestAutomation.Tests\bin\Debug\Microsoft.PowerApps.TestAutomation.Tests.dll'
-
-        testFiltercriteria: 'TestCategory=PowerAppsTestAutomation'
-
-        uiTests: true
-
-        runSettingsFile: '${{parameters.RepositoryName}}\Microsoft.PowerApps.TestAutomation.Tests/patestautomation.runsettings'
-
-        overrideTestrunParameters: '-OnlineUsername ${{ parameters.OnlineUsername }} -OnlinePassword ${{ parameters.OnlinePassword }} -BrowserType "Firefox" -OnlineUrl ${{ parameters.OnlineUrl }} -UsePrivateMode ${{ parameters.UsePrivateMode }} -TestAutomationURLFilePath ${{ parameters.TestAutomationURLFilePath }} -DriversPath $(GeckoWebDriver) -LoginMethod ${{ parameters.LoginMethod }}'
-
-        testRunTitle: 'Run Power Apps Test Automation Tests via Firefox'
-
-      continueOnError: true
